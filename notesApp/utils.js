@@ -4,11 +4,9 @@ const getNote = function(){
     console.log(loadNotes())
 }
 
-const addNote = function(title,body){
+const addNote = (title,body)=>{
 const notes = loadNotes()
-const duplicateNotes = notes.filter(function(note){
-    return note.title === title
-})
+const duplicateNotes = notes.filter((note)=>note.title === title)
 if(duplicateNotes.length === 0){
     notes.push({
         title:title,
@@ -22,11 +20,9 @@ else{
 
 }
 
-const removeNote =function(title){
+const removeNote =(title)=>{
  const notes = loadNotes()
- const foundnote = notes.filter(function(note){
-     return note.title === title
- })
+ const foundnote = notes.filter((note)=>note.title === title)
  if(foundnote.length === 0){
      console.log('No note found')
  }
@@ -35,13 +31,13 @@ const removeNote =function(title){
  
 }
 
-const saveNotes = function(notes){
+const saveNotes = (notes)=>{
     const jsondata = JSON.stringify(notes)
     fs.writeFileSync('notes.json',jsondata)
 
 }
 
-const loadNotes = function(){
+const loadNotes = ()=>{
     try{
         const notes = fs.readFileSync('notes.json').toString()
         return JSON.parse(notes)

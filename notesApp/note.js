@@ -21,7 +21,7 @@ yargs.command({
             type:'string'
         }
     },
-    handler:function(argv){
+    handler:(argv) =>{
         utils.addNote(argv.title,argv.body)
     }
 })
@@ -36,7 +36,7 @@ yargs.command({
             type:'string'
         }
     },
-    handler:function(argv){
+    handler:(argv)=>{
         utils.removeNote(argv.title)
     }
 
