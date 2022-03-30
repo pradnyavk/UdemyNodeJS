@@ -1,13 +1,26 @@
 const fs = require('fs')
+const { title } = require('process')
 
 const getNote = function(){
     console.log(loadNotes())
 }
 
+const readNote = (title) =>{
+    const notes = loadNotes()
+    const note = notes.find((note) => note.title === title)
+    if(note){
+        console.log(note.body)
+    }
+    else{
+        console.log('No such note found')
+    }
+}
+
 const addNote = (title,body)=>{
 const notes = loadNotes()
-const duplicateNotes = notes.filter((note)=>note.title === title)
-if(duplicateNotes.length === 0){
+//const duplicateNotes = notes.filter((note)=>note.title === title)
+const duplicateNote = notes.find((note)=>note.title === title)
+if(!duplicateNote){
     notes.push({
         title:title,
         body:body
@@ -50,5 +63,6 @@ const loadNotes = ()=>{
 module.exports = {
 addNote:addNote,
 getNote:getNote,
-removeNote:removeNote
+removeNote:removeNote,
+readNote:readNote
 }

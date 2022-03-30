@@ -26,6 +26,24 @@ yargs.command({
     }
 })
 
+debugger
+
+
+yargs.command({
+    command:'read',
+    describe:'Read a new note',
+    builder:{
+        title:{
+            describe:'Note title',
+            demandOption: true,
+            type:'string'
+        }
+    },
+    handler:(argv) =>{
+        utils.readNote(argv.title)
+    }
+})
+
 yargs.command({
     command:'remove',
     describe:'To remove a note',
