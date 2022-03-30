@@ -21,7 +21,7 @@ yargs.command({
             type:'string'
         }
     },
-    handler:(argv) =>{
+    handler (argv){
         utils.addNote(argv.title,argv.body)
     }
 })
@@ -36,10 +36,18 @@ yargs.command({
             type:'string'
         }
     },
-    handler:(argv)=>{
+    handler(argv){
         utils.removeNote(argv.title)
     }
 
+})
+
+yargs.command({
+    command:'list',
+    describe:'To list all the notes',
+    handler(argv){
+        utils.getNote()
+    }
 })
 
 yargs.parse()
