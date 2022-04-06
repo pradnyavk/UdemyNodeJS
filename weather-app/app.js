@@ -5,16 +5,16 @@ if(process.argv.length === 2){
     console.log('Please enter a location')
 }
 else{
-geocode(process.argv[2],(error,data)=>{
+geocode(process.argv[2],(error,{latitude,longitude,location}={})=>{
     if(error){
         console.log(error)
     }else{
-    forecast(data.longitude, data.latitude, (error, forecastData) => {
+    forecast(longitude, latitude, (error, forecastData) => {
         if(error)
         {
             console.log(error)
         }else{
-            console.log(data.location)
+            console.log(location)
             console.log(forecastData)
         }
       })
