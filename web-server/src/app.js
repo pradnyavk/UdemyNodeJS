@@ -46,6 +46,14 @@ app.get('/weather',(req,res)=>{
         location:'Pune'
     })
 })
+app.get('/help/*',(req,res)=>{
+    res.send('Help page not found')
+})
+app.get('*',(req,res)=>{
+    res.send('404 Page')
+})
+
+
 
 app.listen(3000,()=>{
     console.log('Started on port 3000')
