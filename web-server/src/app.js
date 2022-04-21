@@ -1,14 +1,18 @@
 const express = require('express')
 const path = require('path')
+const hbs = require('hbs')
 
 const app = express()
 const publicPath = path.join(__dirname,'../public')
 
 //By default hbs looks for /views directory but to customize the directory for hbs do the following:
-const viewsPath = path.join(__dirname,'../templates')
+const viewsPath = path.join(__dirname,'../templates/views')
+
+const partialsPath = path.join(__dirname,'../templates/partials')
 //setting viewsPath to views
 app.set('views',viewsPath)
 
+hbs.registerPartials(partialsPath)
 
 //setup static directory to serve
 app.use(express.static(publicPath))
