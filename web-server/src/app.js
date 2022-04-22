@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const geocode = require('./geocode')
+const forecast = require('./forecast')
 
 const app = express()
 const publicPath = path.join(__dirname,'../public')
@@ -41,9 +43,13 @@ app.get('/about',(req,res)=>{
 })
 
 app.get('/weather',(req,res)=>{
+    if(!req.query.temp){
+        return res.send('Please provide temperture in query')
+    }
     res.send({
         forecast:'Sunny',
-        location:'Pune'
+        location:'Pune',
+        temperture:req.query.temp
     })
 })
 app.get('/help/*',(req,res)=>{
