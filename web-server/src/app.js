@@ -43,14 +43,33 @@ app.get('/about',(req,res)=>{
 })
 
 app.get('/weather',(req,res)=>{
-    if(!req.query.temp){
-        return res.send('Please provide temperture in query')
+    if(!req.query.address){
+        return res.send('Please provide address in query')
     }
-    res.send({
-        forecast:'Sunny',
-        location:'Pune',
-        temperture:req.query.temp
+    geocode(req.query.address,(error,{latitude,longitude,location}={})=>{
+        if(error){
+            return res.send({error})
+        }else{
+        forecast(longitude, latitude, (error, forecastData) => {
+            if(error)
+            {
+                return res.send({error})
+            }else{
+                res.send({
+                    forecast:forecastData,
+                    location,
+                    address:req.query.address
+                })
+               
+            }
+          })
+        }
     })
+    // res.send({
+    //     forecast:'Sunny',
+    //     location:'Pune',
+    //     temperture:req.query.temp
+    // })
 })
 app.get('/help/*',(req,res)=>{
     res.send('Help page not found')
