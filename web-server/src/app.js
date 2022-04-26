@@ -44,7 +44,7 @@ app.get('/about',(req,res)=>{
 
 app.get('/weather',(req,res)=>{
     if(!req.query.address){
-        return res.send('Please provide address in query')
+        return res.send({error:'Please provide address in query'})
     }
     geocode(req.query.address,(error,{latitude,longitude,location}={})=>{
         if(error){
@@ -75,7 +75,11 @@ app.get('/help/*',(req,res)=>{
     res.send('Help page not found')
 })
 app.get('*',(req,res)=>{
-    res.send('404 Page')
+    res.render('404',{
+        title:'404',
+        name:'Pradnya Katigar',
+        errorMessage:'Page Not Found'
+    })
 })
 
 
