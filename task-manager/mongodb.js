@@ -1,4 +1,4 @@
-const {mongoClient, ObjectId} = require('mongodb')
+const { MongoClient, ObjectId} = require('mongodb')
 
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
@@ -9,7 +9,7 @@ const databaseName = 'task-manager'
 // console.log(id._bsontype.length)
 // console.log(id.getTimestamp())
 
-// mongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
+// MongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
 //     if(error){
 //        return console.log('Unable to connect to database')
 //     }
@@ -29,7 +29,7 @@ const databaseName = 'task-manager'
 //     })
 // })
 
-// mongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
+// MongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
 //     if(error){
 //         return console.log('Unable to connect')
 //     }
@@ -54,3 +54,30 @@ const databaseName = 'task-manager'
 //         console.log(result)
 //     })
 // })
+
+MongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
+    if(error){
+       return console.log('Unable to connect')
+    }
+    const db = client.db(databaseName)
+    db.collection('users').findOne({name:'Pradnya'},(error,user)=>{
+        if(error){
+            return console.log('Unable to find data')
+        }
+        console.log(user)
+    })
+
+    db.collection('tasks').find({completed:false}).toArray((error,tasks)=>{
+        if(error){
+            return console.log('Unable to find matching data')
+        }
+        console.log(tasks)
+    })
+
+    db.collection('tasks').findOne({_id:new ObjectId("626ac19b43644478e8fd7e6a")},(error,task)=>{
+        if(error){
+            return console.log('unable to find matching data')
+        }
+        console.log(task)
+    })
+})
