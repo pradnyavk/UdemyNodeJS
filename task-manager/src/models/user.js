@@ -62,6 +62,8 @@ userSchema.statics.findByCredentials = async (email,password)=>{
     return user
 }
 
+userSchema.methods.generateAuthToken = 
+
 const User = mongoose.model('User',userSchema)
 
 
