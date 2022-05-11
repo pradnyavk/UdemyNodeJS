@@ -2,30 +2,48 @@ const express = require('express')
 const Task = require('../models/task')
 const router = new express.Router()
 
-router.post('/tasks',(req,res)=>{
+router.post('/tasks',async(req,res)=>{
     const task = new Task(req.body)
-    task.save().then(()=>{
+    try{
+        await task.save()
         res.status(201).send(task)
-    }).catch((e)=>{
+    }catch(e){
         res.status(400).send(e)
-    })
+    }
+    // task.save().then(()=>{
+    //     res.status(201).send(task)
+    // }).catch((e)=>{
+    //     res.status(400).send(e)
+    // })
 })
 
-router.get('/tasks',(req,res)=>{
-    Task.find({}).then((tasks)=>{
+router.get('/tasks',async(req,res)=>{
+    try{
+        const tasks = await Task.find({})
         res.status(200).send(tasks)
-    }).catch((e)=>{
+    }catch(e){
         res.status(400).send(e)
-    })
+    }
+    // Task.find({}).then((tasks)=>{
+    //     res.status(200).send(tasks)
+    // }).catch((e)=>{
+    //     res.status(400).send(e)
+    // })
 })
 
-router.get('/tasks/:id',(req,res)=>{
+router.get('/tasks/:id',async(req,res)=>{
     const _id = req.params.id
-    Task.findById(_id).then((task)=>{
+    try {
+        const task = await Task.findById(_id)
         res.status(200).send(task)
-    }).catch((e)=>{
+    } catch (e) {
         res.status(400).send(e)
-    })
+    }
+    // Task.findById(_id).then((task)=>{
+    //     res.status(200).send(task)
+    // }).catch((e)=>{
+    //     res.status(400).send(e)
+    // })
 })
 
 

@@ -9,6 +9,11 @@ const app = express()
 const port = process.env.PORT || 3000
 
 
+// app.use((req,res,next)=>{
+//     console.log(req.path,req.method)
+//     next()
+// })
+
 //to consider the incoming data as json
 app.use(express.json())
 
