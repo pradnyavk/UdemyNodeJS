@@ -34,19 +34,27 @@ router.post('/users/login',async (req,res)=>{
     }
 })
 
-router.get('/users',auth,async(req,res)=>{
+// router.get('/users',auth,async(req,res)=>{
+//     try{
+//         const users = await User.find({})
+//         res.status(200).send(users)
+//     }catch(e){
+//         res.status(400).send(e)
+//     }
+
+//     // User.find({}).then((users)=>{
+//     //     res.status(200).send(users)
+//     // }).catch((e)=>{
+//     //     res.status(400).send(e)
+//     // })
+// })
+
+router.get('/users/me',auth,async(req,res)=>{
     try{
-        const users = await User.find({})
-        res.status(200).send(users)
+        res.status(200).send(req.user)
     }catch(e){
         res.status(400).send(e)
     }
-
-    // User.find({}).then((users)=>{
-    //     res.status(200).send(users)
-    // }).catch((e)=>{
-    //     res.status(400).send(e)
-    // })
 })
 
 router.get('/users/:id',async(req,res)=>{
