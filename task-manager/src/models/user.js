@@ -80,6 +80,16 @@ userSchema.methods.generateAuthToken = async function(){
     return token
 }
 
+userSchema.methods.toJSON = function(){
+    const user = this
+    //to convert into an object so we can manipulate which data we want to hide
+    const userObject = user.toObject()
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+}
+
 const User = mongoose.model('User',userSchema)
 
 
