@@ -15,6 +15,25 @@ const port = process.env.PORT || 3000
 // })
 
 //to consider the incoming data as json
+
+// const multer = require('multer')
+// const upload = multer({
+//     dest:'images',
+//     limits:{
+//         fileSize:1000000
+//     },
+//     fileFilter(req,file,cb){
+//         if(!file.originalname.endsWith('.pdf')){
+//             return cb(new Error('Please upload a PDF!'))
+//         }
+//         cb(undefined,true)
+//     }
+// })
+
+// app.post('/upload',upload.single('upload'),(req,res)=>{
+//     res.send()
+// })
+
 app.use(express.json())
 
 app.use(userRouter)
